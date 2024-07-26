@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { IScheduleService } from '../../domain/interfaces/services/IScheduleService';
 import ScheduleService from '../../domain/services/ScheduleService';
+import { ISchedule } from '../entities/ScheduleEntity';
 
 export default class SchedulesController {
   private scheduleService: IScheduleService;
@@ -39,12 +40,12 @@ export default class SchedulesController {
 
   async update(request: Request, response: Response) {
     const { id } = request.params;
-    const { schedule } = request.body;
+    const body = request.body as Partial<ISchedule>;
     try {
-      if (!schedule || !id) {
+      if (!Object.keys(body).length || !id) {
         throw new Error('Invalid schedule ID or Date!');
       }
-      await this.scheduleService.update(id, schedule);
+      await this.scheduleService.update(id, body);
       return response
         .status(200)
         .json({ message: 'Schedule updated successfully' });

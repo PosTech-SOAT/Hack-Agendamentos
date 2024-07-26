@@ -9,6 +9,6 @@ export interface IScheduleService {
     doctorId: string,
     scheduleDate: string,
   ) => Promise<Schedule>;
-  update(id: string, newSchedule: string): Promise<boolean>;
+  update(id: string, schedule: Partial<ISchedule>): Promise<boolean>;
   delete(id: string): Promise<boolean>;
 }

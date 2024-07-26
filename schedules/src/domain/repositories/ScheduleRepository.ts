@@ -30,9 +30,9 @@ export default class ScheduleRepository implements IScheduleRepository {
     return this.getRepo().save(schedule);
   }
 
-  async update(id: string, newSchedule: Date): Promise<boolean> {
+  async update(id: string, schedule: Partial<ISchedule>): Promise<boolean> {
     try {
-      await this.getRepo().update({ id }, { schedule: newSchedule });
+      await this.getRepo().update({ id }, { ...schedule });
       return true;
     } catch (error) {
       throw error;

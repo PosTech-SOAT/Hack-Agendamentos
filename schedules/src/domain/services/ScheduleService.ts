@@ -1,3 +1,5 @@
+import { ISchedule } from '../../infra/entities/ScheduleEntity';
+import { ScheduleStatus } from '../entities/Schedule';
 import { IScheduleRepository } from '../interfaces/repositories/IScheduleRepository';
 import { IScheduleService } from '../interfaces/services/IScheduleService';
 import ScheduleRepository from '../repositories/ScheduleRepository';
@@ -22,15 +24,25 @@ export default class ScheduleService implements IScheduleService {
       clientId: pacientId,
       doctorId,
       schedule: new Date(scheduleDate),
+      status: ScheduleStatus.PENDING,
     });
   }
 
-  async update(id: string, newSchedule: string): Promise<boolean> {
+  async update(id: string, schedule: Partial<ISchedule>): Promise<boolean> {
     try {
-      const updateResult = await this.scheduleRepository.update(
-        id,
-        new Date(newSchedule),
-      );
+      if (schedule.schedule) {
+        schedule.schedule = new Date(schedule.schedule);
+      }
+      delete schedule.clientId;
+      delete schedule.doctorId;
+      if (
+        !Object.values(ScheduleStatus).includes(
+          schedule.status as ScheduleStatus,
+        )
+      ) {
+        throw new Error('The informed status is incorrect.');
+      }
+      const updateResult = await this.scheduleRepository.update(id, schedule);
       if (updateResult) {
         return true;
       }
