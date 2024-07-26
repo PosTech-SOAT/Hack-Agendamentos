@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres
+    container_name: database_hackathon_postech
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=database_hackathon_postech
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - fiap-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  fiap-network:
+    external: true
