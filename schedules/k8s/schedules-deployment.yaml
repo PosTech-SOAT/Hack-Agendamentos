@@ -14,20 +14,20 @@ spec:
     spec:
       containers:
         - name: api
-          image: santanarael/order-fiap
+          image: hsnbruno6/hack-agendamentos
           ports:
             - containerPort: 3000
           env:
             - name: DB_HOST
-              value: postgres-service
+              value: database-ms-agendamento.cluster-cma0pexukaru.us-east-1.rds.amazonaws.com
             - name: DB_PORT
               value: "5432"
             - name: DB_USER
-              value: root
+              value: postgres
             - name: DB_PASS
-              value: root
+              value: Kasjo7-sevpec-jowsam
             - name: DB_NAME
-              value: postech
+              value: postgres
           resources:
             requests:
               memory: '128Mi'

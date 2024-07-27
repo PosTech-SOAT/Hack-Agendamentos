@@ -35,7 +35,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t santanarael/order-fiap:latest --push .
+          docker buildx build --platform linux/amd64,linux/arm64 -t hsnbruno6/hack-agendamentos:latest --push .
 
       - name: Install kubectl
         run: |
@@ -54,7 +54,6 @@ jobs:
       - name: Update kubeconfig
         run: |
           aws eks --region us-east-1 update-kubeconfig --name cluster-terraform
-
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -63,4 +62,6 @@ jobs:
           sleep 10s
           kubectl apply -f k8s/schedules-hpa.yaml
           echo "http://$(kubectl get svc schedules-service -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}'):3000"
-  
+      
+
+
