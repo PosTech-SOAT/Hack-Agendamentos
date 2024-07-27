@@ -19,7 +19,7 @@ spec:
             - containerPort: 3000
           env:
             - name: DB_HOST
-              value: database-ms-agendamento.cluster-cma0pexukaru.us-east-1.rds.amazonaws.com
+              value: fiap-hack-agendamento.cma0pexukaru.us-east-1.rds.amazonaws.com
             - name: DB_PORT
               value: "5432"
             - name: DB_USER
