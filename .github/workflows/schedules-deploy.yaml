@@ -54,7 +54,7 @@ jobs:
           aws eks --region us-east-1 update-kubeconfig --name cluster-terraform
       - name: Apply Kubernetes manifests
         run: |
-          cd k8s
+          ls
           kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
           sleep 10s
           kubectl apply -f k8s/schedules-deployment.yaml
