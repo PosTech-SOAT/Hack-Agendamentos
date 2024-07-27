@@ -17,9 +17,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
+      - name: Checkout to Project Folder
+        run: cd schedules
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
