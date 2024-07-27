@@ -18,7 +18,9 @@ jobs:
         with:
           node-version: '18'
       - name: Checkout to Project Folder
-        run: cd schedules
+        run: |
+          cd schedules 
+          ls
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
